@@ -59,4 +59,4 @@ This project is inspired by methodologies used in peer-reviewed
 research on data-driven optimization of nanocomposites.
 
 The implementation here is simplified and adapted for demonstration 
-purposes in an appli
+purposes in an applied data science context.
