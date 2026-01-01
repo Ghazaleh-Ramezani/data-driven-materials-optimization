@@ -31,12 +31,19 @@ The overarching goal is to bridge experimental materials science with applied da
 ## Project Structure
 
 data-driven-materials-optimization/
+
 ├── notebooks/
+
 │   ├── 01_eda_and_linear_regression.ipynb
+
 │   ├── 02_feature_selection_lasso.ipynb
+
 │   └── 03_nonlinear_models_and_optimization.ipynb
+
 ├── README.md
+
 ├── LICENSE
+
 └── .gitignore
 
 
