@@ -25,7 +25,9 @@ from ddmo.data import FEATURES, TARGETS, design_matrix, load_films, variance_inf
 summary = json.loads((ROOT / "results" / "summary.json").read_text())
 df = load_films()
 X, Y = design_matrix(df)
-pd.set_option("display.precision", 3)"""
+pd.set_option("display.precision", 3)
+pd.set_option("display.notebook_repr_html", False)
+pd.set_option("display.width", 120)"""
 
 NOTEBOOKS = {
     "01_eda_and_linear_regression.ipynb": [
@@ -91,6 +93,8 @@ def build(name: str, cells: list[tuple[str, str]]) -> None:
     nb = nbformat.v4.new_notebook()
     nb.metadata["kernelspec"] = {"name": "python3", "display_name": "Python 3", "language": "python"}
     nb.cells = [nbformat.v4.new_markdown_cell(src) if kind == "md" else nbformat.v4.new_code_cell(src) for kind, src in cells]
+    for i, cell in enumerate(nb.cells):  # fixed ids, so a rebuild is byte-identical
+        cell.id = f"cell-{i:02d}"
     NotebookClient(nb, timeout=600, kernel_name="python3", resources={"metadata": {"path": str(NB)}}).execute()
     for cell in nb.cells:  # drop volatile execution timestamps
         cell.metadata.pop("execution", None)
