@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ddmo"
+version = "1.0.0"
+description = "Nested-CV regression, feature stability and SHAP on 60 measured CNC/CNF/rGO nanocomposite films"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+dependencies = [
+    "numpy>=1.24",
+    "pandas>=2.0",
+    "scikit-learn>=1.3",
+    "matplotlib>=3.7",
+    "shap>=0.44",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7"]
+notebooks = ["nbformat>=5", "nbclient>=0.9", "ipykernel>=6"]
+
+[tool.setuptools]
+packages = ["ddmo"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
