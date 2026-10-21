@@ -51,14 +51,17 @@ from ddmo.optimize import screen  # noqa: E402
 
 plt.rcParams.update({"svg.hashsalt": "ddmo", "svg.fonttype": "none", "font.size": 9})
 _NUM = re.compile(r"-?\d+\.\d{3,}")
+_TAG = re.compile(r"<[^>]+>")
 
 
 def save_svg(fig, path: Path) -> None:
     """Deterministic, compact SVG: no date, text kept as text, coordinates
-    rounded to 0.01 px, no trailing whitespace."""
+    inside tags rounded to 0.01 px (visible labels untouched), no trailing
+    whitespace."""
     fig.savefig(path, format="svg", metadata={"Date": None}, bbox_inches="tight")
     plt.close(fig)
-    text = _NUM.sub(lambda m: f"{float(m.group()):.2f}", path.read_text())
+    rounded = lambda m: f"{float(m.group()):.2f}"  # noqa: E731
+    text = _TAG.sub(lambda t: _NUM.sub(rounded, t.group()), path.read_text())
     path.write_text("\n".join(line.rstrip() for line in text.splitlines()) + "\n")
 
 
