@@ -1,0 +1,13 @@
+alpha,target,CNC_wt_pct,CNF_wt_pct,rGO_wt_pct,acid_M,pH,ascorbic
+0.01,conductivity_S_per_m,1.0,1.0,1.0,0.0,0.0,1.0
+0.01,tensile_strength_MPa,1.0,1.0,1.0,0.01,0.27,1.0
+0.01,thickness_um,0.965,1.0,1.0,0.255,0.91,0.085
+0.05,conductivity_S_per_m,1.0,0.035,1.0,0.0,0.0,1.0
+0.05,tensile_strength_MPa,1.0,0.205,1.0,0.0,0.0,1.0
+0.05,thickness_um,0.795,1.0,1.0,0.385,0.715,0.005
+0.1,conductivity_S_per_m,1.0,0.0,1.0,0.0,0.0,0.875
+0.1,tensile_strength_MPa,1.0,0.0,1.0,0.0,0.0,1.0
+0.1,thickness_um,0.375,0.87,1.0,0.565,0.3,0.0
+0.2,conductivity_S_per_m,1.0,0.0,1.0,0.0,0.0,0.0
+0.2,tensile_strength_MPa,1.0,0.0,1.0,0.0,0.0,0.3
+0.2,thickness_um,0.035,0.145,1.0,0.37,0.04,0.0

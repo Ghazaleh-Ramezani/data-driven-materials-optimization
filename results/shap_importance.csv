@@ -1,0 +1,7 @@
+model,target,CNC_wt_pct,CNF_wt_pct,rGO_wt_pct,acid_M,pH,ascorbic,"composition (CNC, CNF, rGO)","reduction chemistry (acid, pH, agent)"
+mlp,conductivity_S_per_m,0.194003,0.035967,0.110425,0.018956,0.012755,0.075723,0.298476,0.051879
+mlp,tensile_strength_MPa,3.635443,0.597563,0.881709,1.023322,1.638753,0.404469,4.414858,0.923339
+mlp,thickness_um,13.0218,7.204418,4.899452,3.2914,5.366969,1.451383,16.933248,3.052055
+lasso,conductivity_S_per_m,0.118892,0.007255,0.197757,0.0,0.0,0.041627,0.315287,0.041627
+lasso,tensile_strength_MPa,1.719094,0.158209,2.553477,0.0,0.0,0.887981,4.246341,0.887981
+lasso,thickness_um,3.202839,3.571279,14.168736,0.0,1.589161,0.0,16.977938,1.589161
