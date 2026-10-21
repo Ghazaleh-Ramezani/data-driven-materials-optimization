@@ -1,0 +1,541 @@
+{
+  "dataset": {
+    "source": "Ramezani et al., Micromachines 16(4), 393 (2025), doi:10.3390/mi16040393, Tables 2 and 3",
+    "sha256": "51ae1bd6f4bcb7865c28911fd9a34bee69612a50feb125da2972bd5cfe9252b3",
+    "n_films": 60,
+    "n_per_agent": {
+      "ascorbic": 30,
+      "citric": 30
+    },
+    "n_compositions": 32,
+    "features": [
+      "CNC_wt_pct",
+      "CNF_wt_pct",
+      "rGO_wt_pct",
+      "acid_M",
+      "pH",
+      "ascorbic"
+    ],
+    "targets": [
+      "conductivity_S_per_m",
+      "tensile_strength_MPa",
+      "thickness_um"
+    ],
+    "variance_inflation": {
+      "CNC_wt_pct": 25.12,
+      "CNF_wt_pct": 1.98,
+      "rGO_wt_pct": 9.38,
+      "acid_M": 18.96,
+      "pH": 49.99,
+      "ascorbic": 41.33
+    }
+  },
+  "protocol": {
+    "outer": "RepeatedStratifiedKFold(5 folds x 5 repeats), stratified by reducing agent",
+    "inner": "5-fold GridSearchCV on the outer training fold",
+    "grouped": "GroupKFold(5) over (CNC, CNF, rGO) compositions",
+    "split_spread": "200 stratified 80/20 splits"
+  },
+  "nested_cv": {
+    "mean": {
+      "label": "Mean predictor",
+      "r2_mean": -0.0824,
+      "r2_std": 0.0795,
+      "r2_per_target": {
+        "conductivity_S_per_m": -0.0988,
+        "tensile_strength_MPa": -0.0844,
+        "thickness_um": -0.0641
+      },
+      "rmse_per_target": {
+        "conductivity_S_per_m": 0.3774,
+        "tensile_strength_MPa": 5.1358,
+        "thickness_um": 22.406
+      },
+      "n_folds": 25
+    },
+    "ols": {
+      "label": "Linear regression",
+      "r2_mean": 0.9577,
+      "r2_std": 0.0217,
+      "r2_per_target": {
+        "conductivity_S_per_m": 0.996,
+        "tensile_strength_MPa": 0.9889,
+        "thickness_um": 0.8882
+      },
+      "rmse_per_target": {
+        "conductivity_S_per_m": 0.0212,
+        "tensile_strength_MPa": 0.4918,
+        "thickness_um": 6.8327
+      },
+      "n_folds": 25
+    },
+    "lasso": {
+      "label": "LASSO, alpha tuned in inner CV",
+      "r2_mean": 0.9572,
+      "r2_std": 0.0224,
+      "r2_per_target": {
+        "conductivity_S_per_m": 0.9955,
+        "tensile_strength_MPa": 0.9871,
+        "thickness_um": 0.889
+      },
+      "rmse_per_target": {
+        "conductivity_S_per_m": 0.0225,
+        "tensile_strength_MPa": 0.5281,
+        "thickness_um": 6.79
+      },
+      "n_folds": 25,
+      "inner_alpha_median": 0.005623,
+      "inner_alpha_range": [
+        0.0001,
+        0.017783
+      ]
+    },
+    "lasso_paper": {
+      "label": "LASSO, alpha = 0.2 (paper setting)",
+      "r2_mean": 0.8405,
+      "r2_std": 0.0284,
+      "r2_per_target": {
+        "conductivity_S_per_m": 0.648,
+        "tensile_strength_MPa": 0.9801,
+        "thickness_um": 0.8934
+      },
+      "rmse_per_target": {
+        "conductivity_S_per_m": 0.2141,
+        "tensile_strength_MPa": 0.672,
+        "thickness_um": 6.6387
+      },
+      "n_folds": 25
+    },
+    "mlp": {
+      "label": "Multi-output neural network",
+      "r2_mean": 0.9881,
+      "r2_std": 0.0136,
+      "r2_per_target": {
+        "conductivity_S_per_m": 0.9984,
+        "tensile_strength_MPa": 0.9947,
+        "thickness_um": 0.9712
+      },
+      "rmse_per_target": {
+        "conductivity_S_per_m": 0.013,
+        "tensile_strength_MPa": 0.2937,
+        "thickness_um": 3.0907
+      },
+      "n_folds": 25
+    }
+  },
+  "grouped_cv": {
+    "mean": {
+      "r2_mean": -0.0532,
+      "r2_per_target": {
+        "conductivity_S_per_m": -0.0507,
+        "tensile_strength_MPa": -0.0523,
+        "thickness_um": -0.0566
+      }
+    },
+    "ols": {
+      "r2_mean": 0.9649,
+      "r2_per_target": {
+        "conductivity_S_per_m": 0.9964,
+        "tensile_strength_MPa": 0.9894,
+        "thickness_um": 0.909
+      }
+    },
+    "lasso": {
+      "r2_mean": 0.965,
+      "r2_per_target": {
+        "conductivity_S_per_m": 0.9955,
+        "tensile_strength_MPa": 0.9871,
+        "thickness_um": 0.9124
+      }
+    },
+    "lasso_paper": {
+      "r2_mean": 0.8525,
+      "r2_per_target": {
+        "conductivity_S_per_m": 0.6621,
+        "tensile_strength_MPa": 0.9813,
+        "thickness_um": 0.9141
+      }
+    },
+    "mlp": {
+      "r2_mean": 0.9915,
+      "r2_per_target": {
+        "conductivity_S_per_m": 0.9987,
+        "tensile_strength_MPa": 0.996,
+        "thickness_um": 0.9798
+      }
+    }
+  },
+  "single_split_spread": {
+    "lasso_paper": {
+      "r2_median": 0.8429,
+      "r2_p05": 0.747,
+      "r2_p95": 0.874,
+      "r2_per_target_median": {
+        "conductivity_S_per_m": 0.6546,
+        "tensile_strength_MPa": 0.9795,
+        "thickness_um": 0.9025
+      }
+    },
+    "lasso": {
+      "r2_median": 0.9614,
+      "r2_p05": 0.9023,
+      "r2_p95": 0.9794,
+      "r2_per_target_median": {
+        "conductivity_S_per_m": 0.9963,
+        "tensile_strength_MPa": 0.9887,
+        "thickness_um": 0.9006
+      }
+    },
+    "paper_reported_r2": 0.841
+  },
+  "lasso_interpretation": {
+    "n_bootstrap": 200,
+    "alpha_path": [
+      0.01,
+      0.05,
+      0.1,
+      0.2
+    ],
+    "selection_frequency": {
+      "0.01": {
+        "conductivity_S_per_m": {
+          "CNC_wt_pct": 1.0,
+          "CNF_wt_pct": 1.0,
+          "rGO_wt_pct": 1.0,
+          "acid_M": 0.0,
+          "pH": 0.0,
+          "ascorbic": 1.0
+        },
+        "tensile_strength_MPa": {
+          "CNC_wt_pct": 1.0,
+          "CNF_wt_pct": 1.0,
+          "rGO_wt_pct": 1.0,
+          "acid_M": 0.01,
+          "pH": 0.27,
+          "ascorbic": 1.0
+        },
+        "thickness_um": {
+          "CNC_wt_pct": 0.965,
+          "CNF_wt_pct": 1.0,
+          "rGO_wt_pct": 1.0,
+          "acid_M": 0.255,
+          "pH": 0.91,
+          "ascorbic": 0.085
+        }
+      },
+      "0.05": {
+        "conductivity_S_per_m": {
+          "CNC_wt_pct": 1.0,
+          "CNF_wt_pct": 0.035,
+          "rGO_wt_pct": 1.0,
+          "acid_M": 0.0,
+          "pH": 0.0,
+          "ascorbic": 1.0
+        },
+        "tensile_strength_MPa": {
+          "CNC_wt_pct": 1.0,
+          "CNF_wt_pct": 0.205,
+          "rGO_wt_pct": 1.0,
+          "acid_M": 0.0,
+          "pH": 0.0,
+          "ascorbic": 1.0
+        },
+        "thickness_um": {
+          "CNC_wt_pct": 0.795,
+          "CNF_wt_pct": 1.0,
+          "rGO_wt_pct": 1.0,
+          "acid_M": 0.385,
+          "pH": 0.715,
+          "ascorbic": 0.005
+        }
+      },
+      "0.1": {
+        "conductivity_S_per_m": {
+          "CNC_wt_pct": 1.0,
+          "CNF_wt_pct": 0.0,
+          "rGO_wt_pct": 1.0,
+          "acid_M": 0.0,
+          "pH": 0.0,
+          "ascorbic": 0.875
+        },
+        "tensile_strength_MPa": {
+          "CNC_wt_pct": 1.0,
+          "CNF_wt_pct": 0.0,
+          "rGO_wt_pct": 1.0,
+          "acid_M": 0.0,
+          "pH": 0.0,
+          "ascorbic": 1.0
+        },
+        "thickness_um": {
+          "CNC_wt_pct": 0.375,
+          "CNF_wt_pct": 0.87,
+          "rGO_wt_pct": 1.0,
+          "acid_M": 0.565,
+          "pH": 0.3,
+          "ascorbic": 0.0
+        }
+      },
+      "0.2": {
+        "conductivity_S_per_m": {
+          "CNC_wt_pct": 1.0,
+          "CNF_wt_pct": 0.0,
+          "rGO_wt_pct": 1.0,
+          "acid_M": 0.0,
+          "pH": 0.0,
+          "ascorbic": 0.0
+        },
+        "tensile_strength_MPa": {
+          "CNC_wt_pct": 1.0,
+          "CNF_wt_pct": 0.0,
+          "rGO_wt_pct": 1.0,
+          "acid_M": 0.0,
+          "pH": 0.0,
+          "ascorbic": 0.3
+        },
+        "thickness_um": {
+          "CNC_wt_pct": 0.035,
+          "CNF_wt_pct": 0.145,
+          "rGO_wt_pct": 1.0,
+          "acid_M": 0.37,
+          "pH": 0.04,
+          "ascorbic": 0.0
+        }
+      }
+    },
+    "standardized_coefficients": {
+      "0.01": {
+        "conductivity_S_per_m": {
+          "CNC_wt_pct": 0.3912,
+          "CNF_wt_pct": 0.0353,
+          "rGO_wt_pct": 0.6144,
+          "acid_M": -0.0,
+          "pH": 0.0,
+          "ascorbic": 0.1189
+        },
+        "tensile_strength_MPa": {
+          "CNC_wt_pct": 0.4131,
+          "CNF_wt_pct": 0.0487,
+          "rGO_wt_pct": 0.5821,
+          "acid_M": 0.0,
+          "pH": 0.0,
+          "ascorbic": 0.1815
+        },
+        "thickness_um": {
+          "CNC_wt_pct": 0.1845,
+          "CNF_wt_pct": 0.1975,
+          "rGO_wt_pct": 0.7324,
+          "acid_M": -0.0,
+          "pH": -0.0852,
+          "ascorbic": 0.0
+        }
+      },
+      "0.05": {
+        "conductivity_S_per_m": {
+          "CNC_wt_pct": 0.3254,
+          "CNF_wt_pct": 0.0,
+          "rGO_wt_pct": 0.6314,
+          "acid_M": -0.0,
+          "pH": 0.0,
+          "ascorbic": 0.0776
+        },
+        "tensile_strength_MPa": {
+          "CNC_wt_pct": 0.3301,
+          "CNF_wt_pct": 0.0,
+          "rGO_wt_pct": 0.6138,
+          "acid_M": 0.0,
+          "pH": 0.0,
+          "ascorbic": 0.14
+        },
+        "thickness_um": {
+          "CNC_wt_pct": 0.0896,
+          "CNF_wt_pct": 0.1351,
+          "rGO_wt_pct": 0.7857,
+          "acid_M": 0.0,
+          "pH": -0.0649,
+          "ascorbic": -0.0
+        }
+      },
+      "0.1": {
+        "conductivity_S_per_m": {
+          "CNC_wt_pct": 0.3011,
+          "CNF_wt_pct": 0.0,
+          "rGO_wt_pct": 0.6026,
+          "acid_M": -0.0,
+          "pH": 0.0,
+          "ascorbic": 0.0264
+        },
+        "tensile_strength_MPa": {
+          "CNC_wt_pct": 0.3057,
+          "CNF_wt_pct": 0.0,
+          "rGO_wt_pct": 0.5851,
+          "acid_M": 0.0,
+          "pH": 0.0,
+          "ascorbic": 0.0889
+        },
+        "thickness_um": {
+          "CNC_wt_pct": 0.0,
+          "CNF_wt_pct": 0.058,
+          "rGO_wt_pct": 0.817,
+          "acid_M": 0.0464,
+          "pH": -0.0,
+          "ascorbic": -0.0
+        }
+      },
+      "0.2": {
+        "conductivity_S_per_m": {
+          "CNC_wt_pct": 0.2499,
+          "CNF_wt_pct": 0.0,
+          "rGO_wt_pct": 0.5492,
+          "acid_M": 0.0,
+          "pH": -0.0,
+          "ascorbic": 0.0
+        },
+        "tensile_strength_MPa": {
+          "CNC_wt_pct": 0.2567,
+          "CNF_wt_pct": 0.0,
+          "rGO_wt_pct": 0.5282,
+          "acid_M": 0.0,
+          "pH": 0.0,
+          "ascorbic": 0.0
+        },
+        "thickness_um": {
+          "CNC_wt_pct": 0.0,
+          "CNF_wt_pct": 0.0,
+          "rGO_wt_pct": 0.7421,
+          "acid_M": 0.0,
+          "pH": -0.0,
+          "ascorbic": -0.0
+        }
+      }
+    }
+  },
+  "final_models": {
+    "mlp": {
+      "regressor__model__alpha": "0.01",
+      "regressor__model__hidden_layer_sizes": "(16,)"
+    },
+    "lasso": {
+      "regressor__model__alpha": 0.017783
+    }
+  },
+  "shap_mean_abs": {
+    "mlp": {
+      "conductivity_S_per_m": {
+        "CNC_wt_pct": 0.194,
+        "CNF_wt_pct": 0.036,
+        "rGO_wt_pct": 0.1104,
+        "acid_M": 0.019,
+        "pH": 0.0128,
+        "ascorbic": 0.0757
+      },
+      "tensile_strength_MPa": {
+        "CNC_wt_pct": 3.6354,
+        "CNF_wt_pct": 0.5976,
+        "rGO_wt_pct": 0.8817,
+        "acid_M": 1.0233,
+        "pH": 1.6388,
+        "ascorbic": 0.4045
+      },
+      "thickness_um": {
+        "CNC_wt_pct": 13.0218,
+        "CNF_wt_pct": 7.2044,
+        "rGO_wt_pct": 4.8995,
+        "acid_M": 3.2914,
+        "pH": 5.367,
+        "ascorbic": 1.4514
+      }
+    },
+    "lasso": {
+      "conductivity_S_per_m": {
+        "CNC_wt_pct": 0.1189,
+        "CNF_wt_pct": 0.0073,
+        "rGO_wt_pct": 0.1978,
+        "acid_M": 0.0,
+        "pH": 0.0,
+        "ascorbic": 0.0416
+      },
+      "tensile_strength_MPa": {
+        "CNC_wt_pct": 1.7191,
+        "CNF_wt_pct": 0.1582,
+        "rGO_wt_pct": 2.5535,
+        "acid_M": 0.0,
+        "pH": 0.0,
+        "ascorbic": 0.888
+      },
+      "thickness_um": {
+        "CNC_wt_pct": 3.2028,
+        "CNF_wt_pct": 3.5713,
+        "rGO_wt_pct": 14.1687,
+        "acid_M": 0.0,
+        "pH": 1.5892,
+        "ascorbic": 0.0
+      }
+    }
+  },
+  "shap_grouped_share": {
+    "mlp": {
+      "conductivity_S_per_m": {
+        "composition (CNC, CNF, rGO)": 0.8519,
+        "reduction chemistry (acid, pH, agent)": 0.1481
+      },
+      "tensile_strength_MPa": {
+        "composition (CNC, CNF, rGO)": 0.827,
+        "reduction chemistry (acid, pH, agent)": 0.173
+      },
+      "thickness_um": {
+        "composition (CNC, CNF, rGO)": 0.8473,
+        "reduction chemistry (acid, pH, agent)": 0.1527
+      }
+    },
+    "lasso": {
+      "conductivity_S_per_m": {
+        "composition (CNC, CNF, rGO)": 0.8834,
+        "reduction chemistry (acid, pH, agent)": 0.1166
+      },
+      "tensile_strength_MPa": {
+        "composition (CNC, CNF, rGO)": 0.8271,
+        "reduction chemistry (acid, pH, agent)": 0.1729
+      },
+      "thickness_um": {
+        "composition (CNC, CNF, rGO)": 0.9144,
+        "reduction chemistry (acid, pH, agent)": 0.0856
+      }
+    }
+  },
+  "screening": {
+    "best_observed_index": 57,
+    "best_observed_F": 15.004,
+    "candidate": {
+      "CNC_wt_pct": 1.9832,
+      "CNF_wt_pct": 0.5897,
+      "rGO_wt_pct": 0.4066,
+      "acid_M": 0.1685,
+      "pH": 5.7164,
+      "ascorbic": 1.0
+    },
+    "predicted_F": {
+      "mlp": 14.964967470431422,
+      "lasso": 14.989308722931684
+    },
+    "predicted_targets": {
+      "mlp": [
+        1.7079,
+        45.8981,
+        146.3351
+      ],
+      "lasso": [
+        1.6659,
+        46.0773,
+        135.4552
+      ]
+    },
+    "n_candidates": 20000,
+    "n_predicted_above_best_observed_by_all_models": 0
+  },
+  "environment": {
+    "python": "3.13.16",
+    "numpy": "2.5.3",
+    "pandas": "3.0.5",
+    "scikit-learn": "1.9.1"
+  }
+}
